@@ -11,7 +11,7 @@
             <h3>Actualizar</h3>
           </div>
           <div class="card-body">
-            <CrudUpdate :model="model" :apiUrl="apiUrl">
+            <CrudUpdate :valid="valid" :model="model" :apiUrl="apiUrl">
               <div slot="body" class="row">
                     <div class="form-group col-12">
               <label for="">Nombre</label>
@@ -20,9 +20,21 @@
                 name=""
                 v-model="model.nombre"
                 class="form-control"
-                id=""
+                @input="validText"
               />
             </div>
+            <div class="form-group col-12">
+  <label for="">Tipo de Usuario</label>
+  <select
+    name=""
+    v-model="model.tipo"
+    class="form-control"
+    @input="validText"
+  >
+    <option value="1">Administrador</option>
+    <option value="2">Usuario</option>
+  </select>
+</div>
                     <div class="form-group col-12">
               <label for="">Username</label>
               <input
@@ -30,17 +42,17 @@
                 name=""
                 v-model="model.username"
                 class="form-control"
-                id=""
+                @input="validText"
               />
             </div>
                     <div class="form-group col-12">
               <label for="">Email</label>
               <input
-                type="text"
+                type="email"
                 name=""
                 v-model="model.email"
                 class="form-control"
-                id=""
+                @input="validText"
               />
             </div>
                     <div class="form-group col-12">
@@ -50,7 +62,7 @@
                 name=""
                 v-model="model.password"
                 class="form-control"
-                id=""
+                @input="validText"
               />
             </div>
 
@@ -83,10 +95,12 @@ export default {
         username:'',
         email:'',
         password:'',
+        tipo:''
       },
           apiUrl:'users',
           page:'Usuarios',
-      modulo:'Usuario'
+      modulo:'Usuario',
+      valid:false
         };
     },
     methods: {
@@ -94,6 +108,12 @@ export default {
             const res = await this.$api.$get(path);
             return res
         },
+        validText(){
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    console.log(!emailRegex.test(this.model.email));
+    let noEsValido = (this.model.nombre === "" || this.model.tipo === "" || this.model.password === "" || this.model.username === "" || this.model.email === ""||!emailRegex.test(this.model.email));
+    this.valid = noEsValido;
+  },
 
     },
     mounted() {

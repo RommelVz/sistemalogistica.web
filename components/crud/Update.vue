@@ -16,7 +16,7 @@
           </button>
         </div>
         <div class="col-6">
-          <button class="btn btn-dark w-100" @click="Save()">
+          <button class="btn btn-dark w-100" @click="Save()" :disabled="this.valid">
             Actualizar
           </button>
         </div>
@@ -39,6 +39,10 @@ export default {
     apiUrl:{
       type:String,
       default:''
+    },
+    valid:{
+      type:Boolean,
+      default :false
     }
 
   },

@@ -18,6 +18,7 @@
                     <th class="py-0 px-1">NOMBRE</th>
                     <th class="py-0 px-1">EMAIL</th>
                     <th class="py-0 px-1">USUARIO</th>
+                    <th class="py-0 px-1">TIPO USUARIO</th>
                     <th class="py-0 px-1"></th>
                   </thead>
                   <tbody>
@@ -26,6 +27,7 @@
                       <td class="py-0 px-1">{{ m.nombre }}</td>
                       <td class="py-0 px-1">{{ m.email }}</td>
                       <td class="py-0 px-1">{{ m.username }}</td>
+                      <td class="py-0 px-1">{{ m.tipo === 1 ? "Administrador" : "User"  }}</td>
                       <td class="py-0 px-1">
                         <div class="btn-group">
                           <nuxtLink

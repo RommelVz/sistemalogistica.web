@@ -11,12 +11,12 @@
         <div class="col-12">
           <div class="row">
             <div class="col-6">
-          <button class="btn btn-info w-100" @click="$router.back()">
+          <button class="btn btn-info w-100" @click="$router.back()" >
             Regresar
           </button>
         </div>
         <div class="col-6">
-          <button class="btn btn-dark w-100" @click="Save()">
+          <button class="btn btn-dark w-100" @click="Save()" :disabled="this.valid">
             Guardar
           </button>
         </div>
@@ -39,19 +39,24 @@ export default {
     apiUrl:{
       type:String,
       default:''
+    },
+    valid:{
+      type:Boolean,
+      default :false
     }
 
   },
   data() {
     return {
       load: false,
-
     };
   },
   methods: {
     async Save() {
-      this.load = true;
+     
       try {
+
+        this.load = true;
         const res = await this.$api.$post(this.apiUrl, this.model);
         console.log(res);
         this.$swal
@@ -72,7 +77,7 @@ export default {
       } finally {
         this.load = false;
       }
-    },
+    }
   },
   mounted() {
     this.$nextTick(async () => {

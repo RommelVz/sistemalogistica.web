@@ -17,18 +17,19 @@
                     <label>Email </label>
                     <div class="mb-3">
                       <input
-                        type="text"
+                        type="email"
                           v-model="model.email"
                         class="form-control"
                         placeholder="Email"
                         aria-label="Email"
+                        @input="validText"
                       />
                     </div>
                     <label>Password</label>
                     <div class="mb-3">
                       <input
                         type="password"
-v-model="model.password"
+                        v-model="model.password"
                         class="form-control"
                         placeholder="Password"
                         aria-label="Password"
@@ -40,6 +41,7 @@ v-model="model.password"
                         type="button"
                         class="btn bg-gradient-info w-100 mt-4 mb-0"
                       @click="Login()"
+                      :disabled="this.valid"
                       >
                         Ingresar
                       </button>
@@ -80,7 +82,8 @@ v-model="model.password"
         model:{
           email:'',
           password:''
-        }
+        },
+        valid:false
       }
     },
     methods:{
@@ -113,7 +116,14 @@ v-model="model.password"
         })
 
         }
-      }
+      },
+      validText(){
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    console.log(!emailRegex.test(this.model.email));
+    let noEsValido =  this.model.password === "" || this.model.email === ""||!emailRegex.test(this.model.email);
+    this.valid = noEsValido;
+  },
+
     }
   }
 </script>
