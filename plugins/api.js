@@ -7,7 +7,7 @@ export default function ({ $axios }, inject) {
       },
     },
   });
-  let url = "https://api.barranca.online/api/";
+  let url = "http://localhost:8000/api/";
   api.url = url;
   api.setBaseURL(url);
 
