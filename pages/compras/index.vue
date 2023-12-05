@@ -6,119 +6,60 @@
         <div class="row justify-content-end">
           <div class="col-12 col-sm-7">
             <div class="row">
-              <div class="col-12">
-                <div class="card bg-gradient-dark">
-                  <div class="card-header bg-transparent py-2 px-3">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-12">
-                        <div class="input-group input-group-lg">
-                          <span
-                            class="input-group-text text-white bg-transparent border-0"
-                          >
-                            <i
-                              class="ni ni-archive-2 text-lg"
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                          <input
-                            type="text"
-                            class="form-control bg-transparent border-0 text-white"
-                            placeholder="Buscar..."
-                            v-model="buscar"
-                            @keyup.enter="Codebar()"
-                          />
-                        </div>
+            <div class="col-12">
+              <div class="card bg-dark text-white">
+                <div class="card-header py-2 px-3">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-transparent border-0">
+                          <i class="ni ni-archive-2 text-lg"></i>
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control bg-transparent border-0 text-black"
+                          placeholder="Buscar..."
+                          v-model="buscar"
+                          @keyup.enter="Codebar"
+                        />
                       </div>
-                      <div class="col-lg-6 col-md-6 col-12 my-auto ms-auto">
-                        <div class="input-group input-group-lg">
-                          <span
-                            class="input-group-text text-white bg-transparent border-0"
-                          >
-                            <i
-                              class="ni ni-box-2 text-lg"
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                          <select
-                            name=""
-                            id=""
-                            class="form-control bg-transparent border-0 text-white"
-                            v-model="marca"
-                          >
-                            <option value="all" class="text-dark">
-                              Todas las marcas
-                            </option>
-                            <option class="text-dark" v-for="m in marcas" :value="m.id">{{m.nombre}}</option>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 my-auto ms-auto">
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-text bg-transparent border-0">
+                          <i class="ni ni-box-2 text-lg"></i>
+                        </span>
+                        <select
+                          name=""
+                          id=""
+                          class="form-control bg-transparent border-0 text-white"
+                          v-model="marca"
+                        >
+                          <option value="all" class="text-dark">Todas las marcas</option>
+                          <option class="text-dark" v-for="m in marcas" :value="m.id">{{ m.nombre }}</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+
 
               <div class="col-12 py-2" style="min-height: 60vh;max-height: 60vh;overflow-y: scroll;overflow-x: none;">
-                <div class="row">
-
-                  <div class="col-3"  v-for="m in articulosCategoria">
-                    <PosArticulo :articulo="m" @AddCarrito="AddCarrito"></PosArticulo>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-12">
-                <div class="card">
-                  <div class="card-body d-flex p-3">
-                    <h6 class="my-auto">Categoría</h6>
-                    <div class="nav-wrapper position-relative ms-auto w-50">
-                      <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                        <li class="nav-item active" role="presentation">
-                          <a
-                            class="nav-link mb-0 px-0 py-1"
-                            data-bs-toggle="tab"
-                            href="#cam1"
-                            role="tab"
-                            aria-controls="cam1"
-                            aria-selected="true"
-                          >
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="dropdown pt-2">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary ps-4"
-                        id="dropdownCam"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                      </a>
-                      <ul
-                        class="dropdown-menu dropdown-menu-end me-sm-n4 px-2 py-3"
-                        aria-labelledby="dropdownCam"
-                        style=""
-                      >
-                        <li>
-                          <a
-                            class="dropdown-item border-radius-md"
-                            href="javascript:;"
-                            @click="categoria='all'"
-                            >Todo</a
-                          >
-                        </li>
-                        <li  v-for="m in categorias">
-                          <a
-                            class="dropdown-item border-radius-md"
-                            href="javascript:;"
-                            @click="categoria=m.id"
-                            >{{m.nombre}}</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Código de barras</th>
+                      <th>Nombre</th>
+                      <th>Precio</th>
+                      <th></th> <!-- Espacio para el botón de añadir al carrito -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <PosArticulo v-for="m in articulosCategoria" :key="m.id" :articulo="m" @AddCarrito="AddCarrito"></PosArticulo>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

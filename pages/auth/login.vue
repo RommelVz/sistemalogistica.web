@@ -1,7 +1,7 @@
 <template>
    <main class="main-content main-content-bg mt-0 ps">
     <section>
-      <div class="page-header min-vh-75">
+      <div class="page-header min-vh-75"> 
         <div class="container">
           <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
@@ -33,6 +33,7 @@
                         class="form-control"
                         placeholder="Password"
                         aria-label="Password"
+                         @input="validText"
                       />
                     </div>
 
@@ -83,7 +84,7 @@
           email:'',
           password:''
         },
-        valid:false
+        valid:true
       }
     },
     methods:{
@@ -119,9 +120,12 @@
       },
       validText(){
     const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-    console.log(!emailRegex.test(this.model.email));
-    let noEsValido =  this.model.password === "" || this.model.email === ""||!emailRegex.test(this.model.email);
-    this.valid = noEsValido;
+     if(this.model.password == "" || this.model.email == ""){
+       this.valid = true;
+      }else{
+        console.log(!emailRegex.test(this.model.email))
+        this.valid =  !emailRegex.test(this.model.email);
+      }
   },
 
     }
